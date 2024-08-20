@@ -10,6 +10,8 @@ class MainController extends CI_Controller {
 
         public function index()
         {
+                if ($this->session->userdata('logged_in'))
+            redirect(base_url('MainController/dashboard')); 
         $this->load->view('require/header');
         $this->load->view('main/login');
         $this->load->view('require/footer');
@@ -18,6 +20,8 @@ class MainController extends CI_Controller {
 
         public function dashboard()
 	{
+                if (!$this->session->userdata('logged_in')) 
+            redirect(base_url(), 'refresh'); 
         $data['menu'] = 'dashboard';
         $this->load->view('require/header');
         $this->load->view('require/navbar');
@@ -27,18 +31,32 @@ class MainController extends CI_Controller {
 	}
 
 
-	public function si_upload()
+	// public function si_upload()
+	// {
+        // $this->load->view('require/header');
+        // $this->load->view('require/navbar');
+        // $this->load->view('require/nav');
+        // $this->load->view('main/main_view');
+        // $this->load->view('require/footer');
+	// }
+
+
+        public function supplier_po_list()
 	{
+                if (!$this->session->userdata('logged_in')) 
+                redirect(base_url(), 'refresh'); 
+        $data['menu'] = 'supplier_po_list';
         $this->load->view('require/header');
         $this->load->view('require/navbar');
-        $this->load->view('require/nav');
-        $this->load->view('main/main_view');
+        $this->load->view('require/nav', $data);
+        $this->load->view('main/supplier_po_list_ui');
         $this->load->view('require/footer');
 	}
 
-
         public function po_list()
 	{
+                if (!$this->session->userdata('logged_in')) 
+                redirect(base_url(), 'refresh');        
         $data['menu'] = 'po_list';
         $this->load->view('require/header');
         $this->load->view('require/navbar');

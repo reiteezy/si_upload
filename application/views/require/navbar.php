@@ -15,17 +15,17 @@
                     <div class="dropdown-primary dropdown">
                         <div class="dropdown-toggle" data-bs-toggle="dropdown">
                             <!-- <img src="../files/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
-                            <span>User</span>
+                            <span><?php echo $this->session->userdata('supplier_name')?></span>
                             <i class="feather icon-chevron-down"></i>
                         </div>
                         <ul class="profile-notification dropdown-menu" data-dropdown-in="fadeIn"
                             data-dropdown-out="fadeOut">
                            
-                            <li>
+                            <!-- <li>
                                 <a href="#">
                                     <i class="feather icon-user"></i> Profile
                                 </a>
-                            </li>
+                            </li> -->
                            
                             </li>
                             <li>

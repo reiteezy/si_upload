@@ -6,8 +6,8 @@
                 <div class="page-header-title">
                     <i class="feather icon-home bg-c-blue"></i>
                     <div class="d-inline">
-                        <h5>Dashboard</h5>
-                        <span>User</span>
+                        <h5><?php echo $this->session->userdata('supplier_name')?></h5>
+                        <span>Dashboard</span>
                     </div>
                 </div>
             </div>
@@ -35,11 +35,24 @@
                                     <div class="row align-items-center">
                                         <div class="col">
                                             <h6 class="m-b-25">Pending PO</h6>
-                                            <h3 class="f-w-700 text-c-blue">0</h3>
+                                            <h3 class="f-w-700 text-c-blue">
+                                                <?php
+                                            $vendor_id = $this->session->userdata('vendor_code');
+                                            if ($vendor_id) {
+                                                $this->db->where('vendor', $vendor_id);
+                                                $this->db->where('status', "Active");
+                                                $this->db->where('status_b', "Pending");
+                                                $userCount = $this->db->count_all_results('pending_po_header');
+                                                echo $userCount;
+                                            } else {
+                                                echo 'No vendor ID found';
+                                            }
+                                            ?>
+                                            </h3>
                                             <p class="m-b-0"></p>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-eye bg-c-blue"></i>
+                                            <i class="fas fa-hourglass bg-c-blue"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -51,11 +64,23 @@
                                     <div class="row align-items-center">
                                         <div class="col">
                                             <h6 class="m-b-25">Cancelled PO</h6>
-                                            <h3 class="f-w-700 text-c-green">0</h3>
+                                            <h3 class="f-w-700 text-c-red">
+                                                <?php
+                                            $vendor_id = $this->session->userdata('vendor_code');
+                                            if ($vendor_id) {
+                                                $this->db->where('vendor', $vendor_id);
+                                                $this->db->where('status', "Cancelled");
+                                                $userCount = $this->db->count_all_results('pending_po_header');
+                                                echo $userCount;
+                                            } else {
+                                                echo 'No vendor ID found';
+                                            }
+                                            ?>
+                                            </h3>
                                             <p class="m-b-0"></p>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-eye bg-c-green"></i>
+                                            <i class="fas fa-ban bg-c-red"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -67,11 +92,24 @@
                                     <div class="row align-items-center">
                                         <div class="col">
                                             <h6 class="m-b-25">Partially Delivered</h6>
-                                            <h3 class="f-w-700 text-c-yellow">0</h3>
+                                            <h3 class="f-w-700 text-c-yellow">
+                                            <?php
+                                            $vendor_id = $this->session->userdata('vendor_code');
+                                            if ($vendor_id) {
+                                                $this->db->where('vendor', $vendor_id);
+                                                $this->db->where('status', "Active");
+                                                $this->db->where('status_b', "Partially Delivered");
+                                                $userCount = $this->db->count_all_results('pending_po_header');
+                                                echo $userCount;
+                                            } else {
+                                                echo 'No vendor ID found';
+                                            }
+                                            ?>
+                                            </h3>
                                             <p class="m-b-0"></p>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-eye bg-c-yellow"></i>
+                                            <i class="fas fa-truck bg-c-yellow"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -83,11 +121,24 @@
                                     <div class="row align-items-center">
                                         <div class="col">
                                             <h6 class="m-b-25">Fully Delivered</h6>
-                                            <h3 class="f-w-700 text-c-green">0</h3>
+                                            <h3 class="f-w-700 text-c-green">
+                                            <?php
+                                            $vendor_id = $this->session->userdata('vendor_code');
+                                            if ($vendor_id) {
+                                                $this->db->where('vendor', $vendor_id);
+                                                $this->db->where('status', "Active");
+                                                $this->db->where('status_b', "Fully Delivered");
+                                                $userCount = $this->db->count_all_results('pending_po_header');
+                                                echo $userCount;
+                                            } else {
+                                                echo 'No vendor ID found';
+                                            }
+                                            ?>
+                                            </h3>
                                             <p class="m-b-0"></p>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-eye bg-c-red"></i>
+                                            <i class="fas fa-truck bg-c-green"></i>
                                         </div>
                                     </div>
                                 </div>

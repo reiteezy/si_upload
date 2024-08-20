@@ -27,35 +27,40 @@ class LoginController extends CI_Controller {
         //     }
         // }
     }
-
-    public function login(){
-
+    public function login() {
         $user = $this->input->post('user');
         $pass = $this->input->post('pass');
-    
-
-        $result = $this->Account_model->retrieveAccountID($user, $pass);
-
-        if (is_array($result)) {
-            // Credentials are correct, set session variables
-            $_SESSION['mms_user'] = $result['user_id'];
-            $_SESSION['username'] = $result['username'];
-                        
+        
+        // Check in non-AGC users table
+        $check = $this->Account_model->retrieveAccountNonAgc($user, $pass);
+        if ($check == 'active_user') {
             echo json_encode(array('status' => 'success', 'redirect_url' => base_url() . 'MainController/dashboard'));
         } else {
-            // Credentials are incorrect
             echo json_encode(array('status' => 'error', 'message' => 'Invalid Credentials'));
         }
-    }
-    // function session_check_js(){
-    //     $response = 'yes'; 
-        
-    //     $data['response'] = $response;
-    //     echo json_encode($data);
-    //  }
+    
+    // Check in AGC users table
+    // $user = $this->Account_model->retrieveAccountID($user, $pass);
 
-    function logout(){
-        unset($_SESSION['mms_user']);
-        redirect(base_url());
-     }
+        // if ($user) {
+        //     $session_data = array(
+        //         'user_id' => $user['user_id'],
+        //         // 'vendor_id' =>  $result['vendor_no'],
+        //         'username' =>  $user['username'],
+        //         'user_type' =>  $user['user_type']
+        //     );
+        //     $this->session->set_userdata($session_data);
+
+        //     echo json_encode(array('status' => 'success', 'redirect_url' => base_url() . 'MainController/dashboard'));
+        //     return;
+        // }
+    
+        // echo json_encode(array('status' => 'error', 'message' => 'Invalid Credentials'));
+    }
+    
+    function logout() {
+        $this->session->sess_destroy();
+        $this->session->set_flashdata('logout_notification', 'Logged Out Of The System');
+        redirect(base_url(), 'refresh');
+        }
 }

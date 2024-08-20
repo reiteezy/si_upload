@@ -1,0 +1,122 @@
+.gallery-item {
+    margin-bottom: 15px; /* Spacing between images */
+}
+.gallery-item img {
+    border-radius: 8px; /* Rounded corners for images */
+    transition: transform 0.3s; /* Smooth zoom effect on hover */
+    cursor: pointer; /* Change cursor to pointer */
+}
+.gallery-item img:hover {
+    transform: scale(1.05); /* Zoom effect */
+}
+/* .modal-dialog {
+    max-width: 80%; 
+}
+.modal-content {
+    color: #fff;
+    background-color: #000; 
+} */
+.modal-body img {
+    width: 100%; /* Make image take up the full modal width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+
+.upload-container {
+    max-width: 80%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+.upload-container input[type="file"] {
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    width: 100%;
+}
+
+.upload-container input[type="file"]::file-selector-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.upload-container input[type="file"]::file-selector-button:hover {
+    background-color: #0056b3;
+}
+
+.upload-container input[type="submit"] {
+    background-color: #25c352;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.upload-container input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.upload-container input[type="hidden"] {
+    display: none;
+}
+
+/* Optional: Responsive design */
+@media (max-width: 600px) {
+    .upload-container {
+        padding: 10px;
+    }
+
+    .upload-container input[type="file"] {
+        padding: 8px;
+    }
+
+    .upload-container input[type="submit"] {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+/* .login-block {
+    display: flex !important;
+    justify-content: center !important; 
+    align-items: center !important;
+    height: 100vh !important; 
+    background-color: rgb(202, 238, 255);
+} */
+
+/* .login-block .auth-box {
+    max-width: 350px;
+} */
+
+/* HTML: <div class="loader"></div> */
+/* .loader {
+    width: 50px;
+    padding: 8px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #25b09b;
+    --_m: 
+      conic-gradient(#0000 10%,#000),
+      linear-gradient(#000 0 0) content-box;
+    -webkit-mask: var(--_m);
+            mask: var(--_m);
+    -webkit-mask-composite: source-out;
+            mask-composite: subtract;
+    animation: l3 1s infinite linear;
+  }
+  @keyframes l3 {to{transform: rotate(1turn)}} */

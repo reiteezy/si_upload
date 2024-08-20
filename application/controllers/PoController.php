@@ -9,68 +9,296 @@ class PoController extends CI_Controller
          $this->load->model('Account_model');
       }
 
-    function get_po_list(){
-
-    $memory_limit = ini_get('memory_limit');
-    ini_set('memory_limit',-1);
-    ini_set('max_execution_time', 0);
-
-    $start         = $this->input->post('start'); 
-    $length        = $this->input->post('length'); 
-    $searchValue   = $this->input->post('search')['value']; 
-
-    $emp_info    = $this->Account_model->get_user_info($_SESSION['mms_user']);
-    $is_ch   = ($emp_info[0]['user_type'] == 'category-head') ? true : false;
-
-    $po_headers = $this->Po_model->get_all_po_header();
-    $result = array();
-
-    foreach($po_headers as $po){
+      // function get_all_pending_po_list(){
+      //    error_reporting(E_ALL);
+      //    ini_set('display_errors', 1);
+      //    $memory_limit = ini_get('memory_limit');
+      //    ini_set('memory_limit',-1);
+      //    ini_set('max_execution_time', 0);
+ 
+      //    $start         = $this->input->post('start'); 
+      //    $length        = $this->input->post('length'); 
+      //    $searchValue   = $this->input->post('search')['value']; 
+      //    $user_id = $this->session->userdata('user_id');
+         
+        
+      //    $po_headers = $this->Po_model->get_all_pending_po_header();
+      //    $result = array();
+ 
+      //    foreach($po_headers as $po){
+      //       $hd_id = $po["hd_id"];
+      //     //   $log_details = $this->Po_model->getPoLog($hd_id);
+      //       $po["store"] = strtoupper($po["store"]);      
+      //       $po["status"] = ($po["status"]==null) ? "ACTIVE" : $po["status"];
+ 
             
-    $po["store"] = strtoupper($po["store"]);      
-    $po["status"] = ($po["status"]==null) ? "ACTIVE" : $po["status"];
+      //       if($searchValue=='')
+      //          $result[] = $po;
+      //       else{
+      //          if((strpos(strtolower($po["store"]), strtolower($searchValue)) !== false || 
+      //             strpos(strtolower($po["vendor_code"]), strtolower($searchValue)) !== false || 
+      //             strpos(strtolower($po["document_no"]), strtolower($searchValue)) !== false || 
+      //             strpos(strtolower($po["po_date"]), strtolower($searchValue)) !== false || 
+      //             strpos(strtolower($po["status"]), strtolower($searchValue)) !== false )){
+                     
+      //             $result[] = $po;
+      //          }
+      //       }
+            
+      //    }
+ 
+ 
+      //    $totalRecords = count($result);
+      //    $slice = array_slice($result, $start, $length);
+         
+      //    $data = array(
+      //                   'draw'            => $this->input->post('draw'), 
+      //                   'recordsTotal'    => $totalRecords,
+      //                   'recordsFiltered' => $totalRecords,
+      //                   'data'            => $slice
+      //                );
+ 
+      //    echo json_encode($data);  
+      //    ini_set('memory_limit',$memory_limit);  
+ 
+      // }
+ 
 
-    if($po["request_by"]!=null)
-        $po["request_by"] = $this->Account_model->retrieveEmployeeName($log_details["request_by"])["name"];
-    else
-        $po["request_by"] = '';
+      
     
-    if($po["remark_by"]!=null)
-        $po["remark_by"] = $this->Account_model->retrieveEmployeeName($log_details["remark_by"])["name"];
-    else
-        $po["remark_by"] = '';
+    function get_pending_po_list(){
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
+        $memory_limit = ini_get('memory_limit');
+        ini_set('memory_limit',-1);
+        ini_set('max_execution_time', 0);
 
-    
-    if($searchValue=='')
-        $result[] = $po;
-    else{
-        if((strpos(strtolower($po["store"]), strtolower($searchValue)) !== false || 
-            strpos(strtolower($po["vendor_code"]), strtolower($searchValue)) !== false || 
-            strpos(strtolower($po["doc_no"]), strtolower($searchValue)) !== false || 
-            strpos(strtolower($po["po_date"]), strtolower($searchValue)) !== false || 
-            strpos(strtolower($po["status"]), strtolower($searchValue)) !== false )){
-                
-            $result[] = $po;
+        $start         = $this->input->post('start'); 
+        $length        = $this->input->post('length'); 
+        $searchValue   = $this->input->post('search')['value']; 
+        $user_id = $this->session->userdata('user_id');
+        
+       
+        $po_headers = $this->Po_model->get_pending_po_header();
+        $result = array();
+
+        foreach($po_headers as $po){
+           $hd_id = $po["hd_id"];
+         //   $log_details = $this->Po_model->getPoLog($hd_id);
+           $po["store"] = strtoupper($po["store"]);      
+           $po["status"] = ($po["status"]==null) ? "ACTIVE" : $po["status"];
+
+           
+           if($searchValue=='')
+              $result[] = $po;
+           else{
+              if((strpos(strtolower($po["store"]), strtolower($searchValue)) !== false || 
+                 strpos(strtolower($po["vendor_code"]), strtolower($searchValue)) !== false || 
+                 strpos(strtolower($po["document_no"]), strtolower($searchValue)) !== false || 
+                 strpos(strtolower($po["po_date"]), strtolower($searchValue)) !== false || 
+                 strpos(strtolower($po["status"]), strtolower($searchValue)) !== false )){
+                    
+                 $result[] = $po;
+              }
+           }
+           
         }
-    }
-    
-
-    }
 
 
-    $totalRecords = count($result);
-    $slice = array_slice($result, $start, $length);
+        $totalRecords = count($result);
+        $slice = array_slice($result, $start, $length);
+        
+        $data = array(
+                       'draw'            => $this->input->post('draw'), 
+                       'recordsTotal'    => $totalRecords,
+                       'recordsFiltered' => $totalRecords,
+                       'data'            => $slice
+                    );
 
-    $data = array(
-                'draw'            => $this->input->post('draw'), 
-                'recordsTotal'    => $totalRecords,
-                'recordsFiltered' => $totalRecords,
-                'data'            => $slice
-                );
+        echo json_encode($data);  
+        ini_set('memory_limit',$memory_limit);  
 
-    echo json_encode($data);  
-    ini_set('memory_limit',$memory_limit);  
-    }
+     }
+
+
+     function get_cancelled_po_list(){
+      error_reporting(E_ALL);
+      ini_set('display_errors', 1);
+      $memory_limit = ini_get('memory_limit');
+      ini_set('memory_limit',-1);
+      ini_set('max_execution_time', 0);
+
+      $start         = $this->input->post('start'); 
+      $length        = $this->input->post('length'); 
+      $searchValue   = $this->input->post('search')['value']; 
+      $user_id = $this->session->userdata('user_id');
+      // $emp_info    = $this->Account_model->get_user_info($user_id);
+      // $is_ch   = ($emp_info[0]['user_type'] == 'category-head') ? true : false;
+      
+     
+      $po_headers = $this->Po_model->get_cancelled_po_header();
+      $result = array();
+
+      foreach($po_headers as $po){
+         $hd_id = $po["hd_id"];
+       //   $log_details = $this->Po_model->getPoLog($hd_id);
+         $po["store"] = strtoupper($po["store"]);      
+         $po["status"] = ($po["status"]==null) ? "ACTIVE" : $po["status"];
+
+         
+         if($searchValue=='')
+            $result[] = $po;
+         else{
+            if((strpos(strtolower($po["store"]), strtolower($searchValue)) !== false || 
+               strpos(strtolower($po["vendor_code"]), strtolower($searchValue)) !== false || 
+               strpos(strtolower($po["doc_no"]), strtolower($searchValue)) !== false || 
+               strpos(strtolower($po["po_date"]), strtolower($searchValue)) !== false || 
+               strpos(strtolower($po["status"]), strtolower($searchValue)) !== false )){
+                  
+               $result[] = $po;
+            }
+         }
+         
+      }
+
+
+      $totalRecords = count($result);
+      $slice = array_slice($result, $start, $length);
+      
+      $data = array(
+                     'draw'            => $this->input->post('draw'), 
+                     'recordsTotal'    => $totalRecords,
+                     'recordsFiltered' => $totalRecords,
+                     'data'            => $slice
+                  );
+
+      echo json_encode($data);  
+      ini_set('memory_limit',$memory_limit);  
+
+   }
+
+
+
+     function get_partial_delivered_po_list(){
+      error_reporting(E_ALL);
+      ini_set('display_errors', 1);
+      $memory_limit = ini_get('memory_limit');
+      ini_set('memory_limit',-1);
+      ini_set('max_execution_time', 0);
+
+      $start         = $this->input->post('start'); 
+      $length        = $this->input->post('length'); 
+      $searchValue   = $this->input->post('search')['value']; 
+      $user_id = $this->session->userdata('user_id');
+      // $emp_info    = $this->Account_model->get_user_info($user_id);
+      // $is_ch   = ($emp_info[0]['user_type'] == 'category-head') ? true : false;
+      
+     
+      $po_headers = $this->Po_model->get_partial_delivered_po_header();
+      $result = array();
+
+      foreach($po_headers as $po){
+         $hd_id = $po["hd_id"];
+       //   $log_details = $this->Po_model->getPoLog($hd_id);
+         $po["store"] = strtoupper($po["store"]);      
+         $po["status"] = ($po["status"]==null) ? "ACTIVE" : $po["status"];
+
+         
+         if($searchValue=='')
+            $result[] = $po;
+         else{
+            if((strpos(strtolower($po["store"]), strtolower($searchValue)) !== false || 
+               strpos(strtolower($po["vendor_code"]), strtolower($searchValue)) !== false || 
+               strpos(strtolower($po["doc_no"]), strtolower($searchValue)) !== false || 
+               strpos(strtolower($po["po_date"]), strtolower($searchValue)) !== false || 
+               strpos(strtolower($po["status"]), strtolower($searchValue)) !== false )){
+                  
+               $result[] = $po;
+            }
+         }
+         
+      }
+
+
+      $totalRecords = count($result);
+      $slice = array_slice($result, $start, $length);
+      
+      $data = array(
+                     'draw'            => $this->input->post('draw'), 
+                     'recordsTotal'    => $totalRecords,
+                     'recordsFiltered' => $totalRecords,
+                     'data'            => $slice
+                  );
+
+      echo json_encode($data);  
+      ini_set('memory_limit',$memory_limit);  
+
+   }
+
+
+   function get_full_delivered_po_list(){
+      error_reporting(E_ALL);
+      ini_set('display_errors', 1);
+      $memory_limit = ini_get('memory_limit');
+      ini_set('memory_limit',-1);
+      ini_set('max_execution_time', 0);
+
+      $start         = $this->input->post('start'); 
+      $length        = $this->input->post('length'); 
+      $searchValue   = $this->input->post('search')['value']; 
+      $user_id = $this->session->userdata('user_id');
+      
+     
+      $po_headers = $this->Po_model->get_full_delivered_po_header();
+      $result = array();
+
+      foreach($po_headers as $po){
+         $hd_id = $po["hd_id"];
+       //   $log_details = $this->Po_model->getPoLog($hd_id);
+         $po["store"] = strtoupper($po["store"]);      
+         $po["status"] = ($po["status"]==null) ? "ACTIVE" : $po["status"];
+
+         
+         if($searchValue=='')
+            $result[] = $po;
+         else{
+            if((strpos(strtolower($po["store"]), strtolower($searchValue)) !== false || 
+               strpos(strtolower($po["vendor_code"]), strtolower($searchValue)) !== false || 
+               strpos(strtolower($po["document_no"]), strtolower($searchValue)) !== false || 
+               strpos(strtolower($po["po_date"]), strtolower($searchValue)) !== false || 
+               strpos(strtolower($po["status"]), strtolower($searchValue)) !== false )){
+                  
+               $result[] = $po;
+            }
+         }
+         
+      }
+
+
+      $totalRecords = count($result);
+      $slice = array_slice($result, $start, $length);
+      
+      $data = array(
+                     'draw'            => $this->input->post('draw'), 
+                     'recordsTotal'    => $totalRecords,
+                     'recordsFiltered' => $totalRecords,
+                     'data'            => $slice
+                  );
+
+      echo json_encode($data);  
+      ini_set('memory_limit',$memory_limit);  
+
+   }
+
+
+   
+   public function listPoLines(){
+      if (!empty($_POST)) {
+         $hd_id = $_POST["hd_id"];
+         $list = $this->Po_model->getPoLines($hd_id);
+         echo json_encode($list);
+      }
+   }
 
 }
 
