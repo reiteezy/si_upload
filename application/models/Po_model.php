@@ -40,15 +40,21 @@ class Po_model extends CI_Model{
           $vendor_code = $_SESSION['vendor_code'];
           
           $table_query = "
-              SELECT a.hd_id, a.document_no, a.date_ AS po_date, a.vendor AS vendor_code,
-                     a.db_id, a.textfile_name AS doc_no, a.status,
-                     b.value_ AS store
-              FROM pending_po_header a
-              INNER JOIN reorder_store b ON a.db_id = b.databse_id
-              LEFT JOIN reorder_po_log c ON a.hd_id = c.hd_id
-              WHERE (a.status_b = 'Pending')
-              AND a.vendor = ?
-          ";
+            SELECT a.hd_id, a.document_no, a.date_ AS po_date, a.vendor AS vendor_code,
+                   a.db_id, a.textfile_name AS doc_no, a.status, 
+                   b.value_ AS store, MAX(d.document_no) AS si_doc_no 
+            FROM pending_po_header a
+            INNER JOIN reorder_store b ON a.db_id = b.databse_id
+            LEFT JOIN reorder_po_log c ON a.hd_id = c.hd_id
+            LEFT JOIN si_uploads d ON a.document_no = d.document_no
+            WHERE a.status_b = 'Pending'
+            AND a.status = 'Active'
+            AND a.vendor = ?
+            GROUP BY a.hd_id, a.document_no,  a.date_, a.vendor, a.db_id, 
+                     a.textfile_name, 
+                     a.status, 
+                     b.value_
+            ";
           
           $query = $this->db->query($table_query, [$vendor_code]);
           
@@ -66,12 +72,17 @@ class Po_model extends CI_Model{
         $table_query = "
             SELECT a.hd_id, a.document_no, a.date_ AS po_date, a.vendor AS vendor_code,
                    a.db_id, a.textfile_name AS doc_no, a.status,
-                   b.value_ AS store
+                   b.value_ AS store, MAX(d.document_no) AS si_doc_no 
             FROM pending_po_header a
             INNER JOIN reorder_store b ON a.db_id = b.databse_id
             LEFT JOIN reorder_po_log c ON a.hd_id = c.hd_id
+            LEFT JOIN si_uploads d ON a.document_no = d.document_no
             WHERE (a.status = 'Cancelled')
             AND a.vendor = ?
+            GROUP BY a.hd_id, a.document_no,  a.date_, a.vendor, a.db_id, 
+                     a.textfile_name, 
+                     a.status, 
+                     b.value_
         ";
         
         $query = $this->db->query($table_query, [$vendor_code]);
@@ -89,12 +100,18 @@ class Po_model extends CI_Model{
         $table_query = "
             SELECT a.hd_id, a.document_no, a.date_ AS po_date, a.vendor AS vendor_code,
                    a.db_id, a.textfile_name AS doc_no, a.status,
-                   b.value_ AS store
+                   b.value_ AS store, MAX(d.document_no) AS si_doc_no 
             FROM pending_po_header a
             INNER JOIN reorder_store b ON a.db_id = b.databse_id
             LEFT JOIN reorder_po_log c ON a.hd_id = c.hd_id
+            LEFT JOIN si_uploads d ON a.document_no = d.document_no
             WHERE (a.status_b = 'Partially Delivered')
+            AND (a.status = 'Active')
             AND a.vendor = ?
+            GROUP BY a.hd_id, a.document_no,  a.date_, a.vendor, a.db_id, 
+                     a.textfile_name, 
+                     a.status, 
+                     b.value_
         ";
         
         $query = $this->db->query($table_query, [$vendor_code]);
@@ -113,13 +130,19 @@ class Po_model extends CI_Model{
         $table_query = "
             SELECT a.hd_id, a.document_no, a.date_ AS po_date, a.vendor AS vendor_code,
                    a.db_id, a.textfile_name AS doc_no, a.status,
-                   b.value_ AS store
+                   b.value_ AS store, MAX(d.document_no) AS si_doc_no 
             FROM pending_po_header a
             INNER JOIN reorder_store b ON a.db_id = b.databse_id
             LEFT JOIN reorder_po_log c ON a.hd_id = c.hd_id
+            LEFT JOIN si_uploads d ON a.document_no = d.document_no
             WHERE (a.status_b = 'Fully Delivered')
+            AND (a.status = 'Active')
             AND a.vendor = ?
-        ";
+            GROUP BY a.hd_id, a.document_no,  a.date_, a.vendor, a.db_id, 
+                     a.textfile_name, 
+                     a.status, 
+                     b.value_
+            ";
         
         $query = $this->db->query($table_query, [$vendor_code]);
         

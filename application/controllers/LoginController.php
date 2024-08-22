@@ -8,24 +8,7 @@ class LoginController extends CI_Controller {
         parent::__construct();
         $this->load->model('Account_model');
 
-        // if (isset($_SESSION['mms_user'])) {
-        //     $userCount = $this->Account_model->getUserCountById($_SESSION['mms_user']);
-        //     var_dump($userCount);
 
-        //     if ($userCount > 0) {
-        //         $userDetails = $this->Account_model->retrieveUserDetails();
-        //         var_dump($userDetails); 
-        //         $userType = $userDetails["user_type"];
-        //         var_dump($userType); 
-
-              
-        //             redirect(base_url('MainController/dashboard'));
-               
-                
-        //     } else {
-        //         unset($_SESSION['mms_user']);
-        //     }
-        // }
     }
     public function login() {
         $user = $this->input->post('user');
@@ -35,12 +18,18 @@ class LoginController extends CI_Controller {
         $check = $this->Account_model->retrieveAccountNonAgc($user, $pass);
         if ($check == 'active_user') {
             echo json_encode(array('status' => 'success', 'redirect_url' => base_url() . 'MainController/dashboard'));
+            return;
         } else {
-            echo json_encode(array('status' => 'error', 'message' => 'Invalid Credentials'));
+            $user = $this->Account_model->retrieveAccountID($user, $pass);
+            if ($user == 'active_user') {
+                echo json_encode(array('status' => 'success', 'redirect_url' => base_url() . 'MainController/dashboard'));
+                return;
+            } else {
+                echo json_encode(array('status' => 'error', 'message' => 'Invalid Credentials'));
+            }
         }
-    
+        echo json_encode(array('status' => 'error', 'message' => 'Invalid Credentials'));
     // Check in AGC users table
-    // $user = $this->Account_model->retrieveAccountID($user, $pass);
 
         // if ($user) {
         //     $session_data = array(

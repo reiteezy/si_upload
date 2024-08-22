@@ -9,7 +9,7 @@
 
 <script type="text/javascript" src="<?= base_url('assets/'); ?>bower_components/sweetalert/js/sweetalert2.min.js"></script>
 
-<script type="text/javascript" src="<?php echo base_url('assets/assets/js/email-decode.min.js')?>"></script>
+<!-- <script type="text/javascript" src="<?php echo base_url('assets/assets/js/email-decode.min.js')?>"></script> -->
 
 <script type="text/javascript" src="<?php echo base_url('assets/bower_components/jquery/js/jquery.min.js')?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/bower_components/jquery-ui/js/jquery-ui.min.js')?>">
@@ -18,6 +18,10 @@
 </script>
 <script type="text/javascript" src="<?php echo base_url('assets/bower_components/bootstrap/js/bootstrap.min.js')?>">
 </script>
+
+
+<!-- <script type="text/javascript" src="<?php echo base_url('assets/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')?>"></script> -->
 
 <script type="text/javascript" src="<?php echo base_url('assets/assets/pages/waves/js/waves.min.js')?>"></script>
 

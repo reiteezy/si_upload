@@ -81,7 +81,8 @@ class PoController extends CI_Controller
        
         $po_headers = $this->Po_model->get_pending_po_header();
         $result = array();
-
+         // var_dump($po_headers);
+         // exit();
         foreach($po_headers as $po){
            $hd_id = $po["hd_id"];
          //   $log_details = $this->Po_model->getPoLog($hd_id);

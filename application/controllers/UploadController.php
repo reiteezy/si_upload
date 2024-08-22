@@ -49,11 +49,11 @@ class UploadController extends CI_Controller {
                     $data['uploads'][$i] = $upload_data;
                     $this->Upload_model->save_upload_details($doc_no, $upload_data['file_name']);
                     $data['status'] = 'success';
-                    $data['message'] = 'Image/s uploaded successfully!';
+                    $data['message'] = 'SI uploaded successfully!';
                 } else {
                     $data['errors'][$i] = $this->upload->display_errors();
                     $data['status'] = 'error';
-                    $data['message'] = 'Failed to upload image/s.';
+                    $data['message'] = 'Failed to upload SI.';
                 }
             }
     
@@ -110,7 +110,7 @@ class UploadController extends CI_Controller {
                     </div>';
             }
         } else {
-            $output .= '<p>No images uploaded for this document number.</p>';
+            $output .= '<p>No SI uploaded for this document number.</p>';
         }
     
         echo $output; 

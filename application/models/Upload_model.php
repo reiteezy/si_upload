@@ -1,15 +1,15 @@
 <?php
 class Upload_model extends CI_Model {
 
-public function get_last_sequence_number($doc_no) {
-    $this->db->select('MAX(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(img_path, "_si_", -1), ".", 1) AS UNSIGNED)) as last_seq');
-    $this->db->from('si_uploads');
-    $this->db->where('document_no', $doc_no);
-    $query = $this->db->get();
-    $result = $query->row();
+// public function get_last_sequence_number($doc_no) {
+//     $this->db->select('MAX(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(img_path, "_si_", -1), ".", 1) AS UNSIGNED)) as last_seq');
+//     $this->db->from('si_uploads');
+//     $this->db->where('document_no', $doc_no);
+//     $query = $this->db->get();
+//     $result = $query->row();
 
-    return $result->last_seq ? $result->last_seq : 0;
-}
+//     return $result->last_seq ? $result->last_seq : 0;
+// }
 
 public function update_last_sequence_number($doc_no, $new_seq_number) {
 }

@@ -3,7 +3,7 @@
 
 
 <head>
-<title>SI UPLOADING</title>
+<title>MMS - SI UPLOADING</title>
 
 
 
@@ -11,12 +11,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-
+<link rel="icon" href="<?php echo base_url('assets/assets/images/cart_logo.png')?>" type="image/x-icon">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bower_components/bootstrap/css/bootstrap.min.css')?>">
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/'); ?>bower_components/sweetalert/css/sweetalert2.css">
+
+
+<!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')?>"> -->
 
 <link rel="stylesheet" href="<?php echo base_url('assets/assets/pages/waves/css/waves.min.css')?>" type="text/css" media="all">
 
