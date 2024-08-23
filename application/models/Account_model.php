@@ -55,8 +55,9 @@ class Account_model extends CI_Model{
         // AGC USER -------------------
         function retrieveAccountID($user, $pass) 
         {
-            $this->db->where('username.', $user);
-            $this->db->where('user_type.', 'buyer');
+            $this->db->where('username', $user);
+            $this->db->where('user_type', 'buyer');
+            $this->db->or_where('user_type', 'man/ceb');
             $this->db->select('reorder_users.*');
             $this->db->from('reorder_users');
             $query = $this->db->get();
@@ -73,7 +74,7 @@ class Account_model extends CI_Model{
                         'username' => $row->username,
                         'emp_id' => $row->emp_id,
                         'user_type' => $row->user_type,
-                        // 'emp_name' => isset($empDetails->name) ? $empDetails->name : 'Unknown',
+                        'emp_name' => isset($empDetails->name) ? $empDetails->name : 'Unknown',
                         'logged_in' => true
                     );
                     $this->session->set_userdata($session_data);

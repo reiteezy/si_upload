@@ -219,6 +219,7 @@
                         <div class="col-md-6 col-xs-12">
                             <div id="po_date_txt"></div>
                         </div>
+                        
                     </div>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -226,8 +227,8 @@
             <div class="modal-body" style="height: 500px; overflow-y: auto;">
                 <div class="card-block">
                     <div style="margin-left: 120px;">
-                    <span style="font-size: 10px; color: red;">Max size: 2MB</span>
-                    
+                        <span style="font-size: 10px; color: red;">Max size: 2MB</span>
+
                     </div>
                     <div class="upload-container">
                         <form id="uploadForm" enctype="multipart/form-data">
@@ -384,16 +385,15 @@
 $(document).ready(function(e) {
     $("#uploadForm").on('submit', function(e) {
         e.preventDefault();
-
-        // Show the loader
+       var uploadType = "si_upload";
         $("#loaderModal").modal('show');
 
         var docNum = $('#doc_no_val').val();
         var formData = new FormData(this);
         console.log(docNum);
-
         var minLoadTime = 3000;
         var startTime = Date.now();
+        formData.append('uploadType', uploadType);
 
         $.ajax({
             url: "<?= base_url('UploadController/upload_images'); ?>",
@@ -894,7 +894,7 @@ function viewUploadSiModal(hd_id, store, po_date, document_no) {
 
 function loadImages(document_no) {
     $.ajax({
-        url: '<?= base_url('UploadController/view_images/'); ?>' + document_no,
+        url: '<?= base_url('UploadController/view_si_images/'); ?>' + document_no,
         type: 'GET',
         dataType: 'html',
         success: function(response) {

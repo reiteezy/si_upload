@@ -38,33 +38,23 @@
                             <h5>View List</h5>
                         </div> -->
                         <!-- <div class="col-lg-6 col-xl-6" style="padding: 20px;"> -->
-                        <ul class="nav nav-tabs md-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#pendingtab"
-                                    role="tab">Pending</a>
+                        <ul class="nav nav-tabs md-tabs" role="">
+                            <li class="nav-item" style="width: 300px; flex: none;">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#noncas_po_tab"
+                                    role="tab">NON-CAS</a>
                                 <div class="slide"></div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#cancelledtab" role="tab">Cancelled</a>
-                                <div class="slide"></div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#partialtab" role="tab">Partially
-                                    Delivered</a>
-                                <div class="slide"></div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#fulltab" role="tab">Fully Delivered</a>
+                            <li class="nav-item" style="width: 300px; flex: none;">
+                                <a class="nav-link" data-bs-toggle="tab" href="#cas_po_tab" role="tab">CAS</a>
                                 <div class="slide"></div>
                             </li>
                         </ul>
                         <div class="tab-content card-block">
-                            <div class="tab-pane active" id="pendingtab" role="tabpanel">
+                            <div class="tab-pane active" id="" role="">
                                 <div class="card-header">
-                                    <h5>View Pending</h5>
                                 </div>
                                 <div class="table-responsive">
-                                    <table id="pending_tbl" class="table table-striped table-bordered ">
+                                    <table id="po_tbl" class="table table-striped table-bordered ">
                                         <thead>
                                             <tr>
                                                 <th>Store</th>
@@ -73,6 +63,7 @@
                                                 <th>Date</th>
                                                 <th>Status</th>
                                                 <!-- <th>Remarks</th> -->
+                                                <th>Delivery Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -87,108 +78,7 @@
                                                 <th>Date</th>
                                                 <th>Status</th>
                                                 <!-- <th>Remarks</th> -->
-                                                <th>Action</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="cancelledtab" role="tabpanel">
-                                <div class="card-header">
-                                    <h5>View Cancelled</h5>
-                                </div>
-                                <div class="dt-responsive table-responsive">
-                                    <table id="cancelled_tbl" class="table table-striped table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Store</th>
-                                                <th>Vendor Code</th>
-                                                <th>Doc. No.</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <!-- <th>Remarks</th> -->
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Store</th>
-                                                <th>Vendor Code</th>
-                                                <th>Doc. No.</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <!-- <th>Remarks</th> -->
-                                                <th>Action</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="partialtab" role="tabpanel">
-                                <div class="card-header">
-                                    <h5>View Partially Delivered</h5>
-                                </div>
-                                <div class="dt-responsive table-responsive">
-                                    <table id="partial_tbl" class="table table-striped table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Store</th>
-                                                <th>Vendor Code</th>
-                                                <th>Doc. No.</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <!-- <th>Remarks</th> -->
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Store</th>
-                                                <th>Vendor Code</th>
-                                                <th>Doc. No.</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <!-- <th>Remarks</th> -->
-                                                <th>Action</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="fulltab" role="tabpanel">
-                                <div class="card-header">
-                                    <h5>View Fully Delivered</h5>
-                                </div>
-                                <div class="dt-responsive table-responsive">
-                                    <table id="full_tbl" class="table table-striped table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Store</th>
-                                                <th>Vendor Code</th>
-                                                <th>Doc. No.</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <!-- <th>Remarks</th> -->
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Store</th>
-                                                <th>Vendor Code</th>
-                                                <th>Doc. No.</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <!-- <th>Remarks</th> -->
+                                                <th>Delivery Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
@@ -204,7 +94,7 @@
 </div>
 
 <!---------------- UPLOAD SI MODAL---------------->
-<div class="modal fade" id="upload_si_modal" tabindex="-1" role="dialog">
+<div class="modal fade" id="upload_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -216,6 +106,11 @@
                         <div class="col-md-6 col-xs-12">
                             <div id="po_date_txt"></div>
                         </div>
+                        <?php
+                            $user_type = $_SESSION['user_type'];
+                                ?>
+                        <div id="session-data"
+                            data-user-type="<?php echo htmlspecialchars($user_type, ENT_QUOTES, 'UTF-8'); ?>"></div>
                     </div>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -228,7 +123,12 @@
                         <form id="uploadForm" enctype="multipart/form-data">
                             <input type="file" name="images[]" multiple>
                             <div class="text-center">
-                            <input type="submit" name="upload" value="Upload SI"></div>
+                                <?php
+                                    $buttonText = ($_SESSION['user_type'] === 'buyer') ? 'UPLOAD SRR' : 'UPLOAD SI';
+                                    ?>
+                                <input type="submit" name="upload"
+                                    value="<?php echo htmlspecialchars($buttonText, ENT_QUOTES, 'UTF-8'); ?>">
+                            </div>
                             <input type="hidden" name="doc_no_val" id="doc_no_val">
                         </form>
                     </div>
@@ -236,7 +136,7 @@
                         <div class="container">
                             <div class="row" id="gallery-container">
                             </div>
-                      
+
                         </div>
 
                     </div>
@@ -251,10 +151,9 @@
 </div>
 
 <!--------------- END OF UPLOAD SI MODAL---------------->
-<!---- view uploaded si modal-->
-<!-- Modal -->
-<div class="modal fade" id="view_si_modal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
-    aria-hidden="true">
+<!---- view uploaded si img modal-->
+<div class="modal fade" id="view_si_img_modal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+    aria-hidden="true" style="z-index: 1080;">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 40%">
         <div class="modal-content">
             <div class="modal-body">
@@ -264,21 +163,152 @@
     </div>
 </div>
 
-<!---- end of view uploaded si modal--->
+<!---- end of view uploaded si img modal--->
+<!---- view uploaded srr img modal-->
+<div class="modal fade" id="view_srr_img_modal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+    aria-hidden="true" style="z-index: 1080;">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 40%">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img id="srrImage" src="" alt="SRR Image">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---- end of view uploaded srr img modal--->
+
+<!--- view po list modal -->
+<div class="modal fade" id="po_lines_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <div id="po_doc_no_txt2"></div>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <div id="po_date_txt2"></div>
+                        </div>
+                        <input type="hidden" name="doc_no_val2" id="doc_no_val">
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="height: 500px; overflow-y: auto;">
+                <div class="card-block">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+
+                            <button class="nav-link active btn btn-primary btn-square waves-effect waves-light"
+                                id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#po-lines" type="button"
+                                role="tab" aria-controls="pills-home" aria-selected="true"
+                                style="border: 1px solid #4099ff">PO LINES</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link btn btn-primary btn-square waves-effect waves-light"
+                                id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#si_uploaded" type="button"
+                                role="tab" aria-controls="pills-profile" aria-selected="false"
+                                style="border: 1px solid #4099ff"> <?php
+                                    $buttonText = ($_SESSION['user_type'] === 'man/ceb') ? 'UPLOADED SI' : 'UPLOADED SRR';
+                                    ?><?php echo htmlspecialchars($buttonText, ENT_QUOTES, 'UTF-8'); ?></button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="po-lines" role="tabpanel"
+                            aria-labelledby="pills-home-tab">
+                            <div class="dt-responsive table-responsive">
+                                <table id="po_lines_table" class="table table-striped table-bordered"
+                                    style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Item Code</th>
+                                            <th>Description</th>
+                                            <th>Uom</th>
+                                            <th>Qty</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Item Code</th>
+                                            <th>Description</th>
+                                            <th>Uom</th>
+                                            <th>Qty</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="si_uploaded" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div class="card-block" style="padding-top: 30px">
+                                <div class="container" style="max-height: 600px;">
+                                    <div class="row" id="gallery-container2">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect " data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary waves-effect waves-light ">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--- end of view po modal -->
+
+<!-- loader modal ---->
+<div id="loaderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loaderModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <!-- <div class="loader"></div> -->
+                <!-- <img src="<?= base_url('assets/assets/loader.gif')?>" alt="Loading..." width="20" /> -->
+                <p>Uploading...</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of loader modal -->
+
+
+
 <script type="text/javascript" src="<?= base_url('assets/assets/js/jquery-3.7.0.js'); ?>"></script>
 <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script> -->
 <script src="<?php echo base_url(); ?>assets/assets/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.js"></script>
 <script>
-
-
-
 $(document).ready(function(e) {
     $("#uploadForm").on('submit', function(e) {
         e.preventDefault();
+        var userType = $('#session-data').data('user-type');
+        // Show the loader
+        
+        if(userType == 'man/ceb'){
+            var uploadType = 'si_upload';
+        } else {
+            var uploadType = 'srr_upload';
+        }
+        $("#loaderModal").modal('show');
+
         var docNum = $('#doc_no_val').val();
         var formData = new FormData(this);
         console.log(docNum);
+        var minLoadTime = 3000;
+        var startTime = Date.now();
+        formData.append('uploadType', uploadType);
+
         $.ajax({
             url: "<?= base_url('UploadController/upload_images'); ?>",
             type: "POST",
@@ -287,19 +317,38 @@ $(document).ready(function(e) {
             processData: false,
             dataType: 'json',
             success: function(response) {
-                Swal.fire({
-                    title: response.status === 'success' ? 'Success' : response
-                        .status === 'error' ? 'Error' : 'Warning',
-                    text: response.message,
-                    icon: response.status === 'success' ? 'success' : response
-                        .status === 'error' ? 'error' : 'warning'
-                }).then(() => {
-                    if (response.status === 'success') {
-                        location.reload(true);
+                var elapsedTime = Date.now() - startTime;
+                var remainingTime = Math.max(0, minLoadTime - elapsedTime);
+
+                setTimeout(function() {
+                    if(uploadType == 'si_upload'){
+                        loadSiImages(docNum);
+                    } else {
+                        loadSrrImages(docNum);
                     }
-                });
+                    
+                    
+                    $("#loaderModal").modal('hide');
+
+                    Swal.fire({
+                        title: response.status === 'success' ? 'Success' :
+                            response.status === 'error' ? 'Error' :
+                            'Warning',
+                        text: response.message,
+                        icon: response.status === 'success' ? 'success' :
+                            response.status === 'error' ? 'error' :
+                            'warning'
+                    }).then(() => {
+                        if (response.status === 'success') {
+                            $("#uploadForm")[0].reset();
+                            $("#uploadForm input[type='file']").val('');
+                        }
+                    });
+                }, remainingTime);
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                $("#loaderModal").modal('hide');
+
                 Swal.fire({
                     title: 'Error',
                     text: 'An unexpected error occurred. Please try again.',
@@ -310,193 +359,194 @@ $(document).ready(function(e) {
     });
 });
 
-function viewSiModal(imgElement) {
+function viewSrrModal(imgElement) {
     var imgSrc = imgElement.getAttribute('data-img-src');
     console.log('Image Source:', imgSrc);
     $('#siImage').attr('src', imgSrc);
-    $('#view_si_modal').modal('show');
+    $('#view_srr_modal').modal('show');
 }
 // const uploadTable = $("#upload_si_modal").DataTable({ "ordering": false});
 
-load_pending_po_table();
-load_cancelled_po_table();
+// load_noncas_po_table();
+// load_cas_po_table();
 
 
-var dataTable_reorder;
 
-function load_pending_po_table() {
 
-    if (dataTable_pending) {
-        dataTable_pending.destroy();
-    }
 
-    var dataTable_pending = $('#pending_tbl').DataTable({
-        processing: true,
-        serverSide: true,
-        searching: true,
-        lengthChange: false,
-        ordering: false,
-        ajax: {
-            url: "<?php echo base_url(); ?>PoController/get_all_pending_po_list",
-            type: "POST",
-            data: function(d) {
-                d.start = d.start || 0;
-                d.length = d.length || 10;
+
+$('a[data-bs-toggle="tab"]').on('click', function(e) {
+    reload_table();
+
+    console.log("Currently selected tab ID:", getSelectedTab());
+});
+
+function getSelectedTab() {
+    let activeTab = $(".nav-link.active");
+
+    let tabId = activeTab.attr("href");
+
+    return tabId.substring(1);
+}
+
+console.log("Currently selected tab ID:", getSelectedTab());
+
+function reload_table() {
+    dataTable_po.ajax.reload();
+}
+
+
+var dataTable_po;
+
+
+
+var dataTable_po = $('#po_tbl').DataTable({
+    processing: true,
+    serverSide: true,
+    searching: true,
+    lengthChange: false,
+    ordering: false,
+    ajax: {
+        url: "<?php echo base_url(); ?>PoController/get_po_list",
+        type: "POST",
+        data: function(d) {
+            d.start = d.start || 0;
+            d.length = d.length || 10;
+            d.tab = getSelectedTab();
+        }
+    },
+    columns: [{
+            data: 'store'
+        },
+        {
+            data: 'vendor_code'
+        },
+        {
+            data: 'doc_no'
+        },
+        {
+            data: 'po_date'
+        },
+        {
+            data: 'status',
+            render: function(data, type, row) {
+                if (row.status === 'Active') {
+                    return '<span class="badge badge-success">' + row.status + '</span>';
+                } else if (row.status === 'Cancelled') {
+                    return '<span class="badge badge-danger">CANCELLED</span>';
+                }
+                return row.status;
             }
         },
-        columns: [{
-                data: 'store'
-            },
-            {
-                data: 'vendor_code'
-            },
-            {
-                data: 'doc_no'
-            },
-            {
-                data: 'po_date'
-            },
-            {
-                data: 'status',
-                render: function(data, type, row) {
-                    if (row.status === 'Active') {
-                        return '<span class="badge badge-success">' + row.status + '</span>';
-                    } else if (row.status === 'Cancelled') {
-                        return '<span class="badge badge-danger">CANCELLED</span>';
-                    }
-                    return row.status;
+        {
+
+            render: function(data, type, row) {
+                // Conditionally assign a CSS class based on the 'status' value
+                if (row.status_b === 'Pending') {
+
+                    return '<span class="badge badge-warning">' + row.status_b + '</span>'
+
+                } else if (row.status_b === 'Partially Delivered') {
+
+                    return '<span class="badge badge-info">' + row.status_b + '</span>'
+
+                } else if (row.status_b === 'Fully Delivered') {
+
+                    return '<span class="badge badge-success">' + row.status_b + '</span>'
+
+                } else {
+                    return ' '
                 }
-            },
-            {
-                data: null,
-                orderable: false,
-                render: function(data, type, row) {
-                    if (row.status === 'Active') {
+
+                return row.status; // If none of the conditions match, return the original data
+            }
+        },
+
+        {
+            data: null,
+            orderable: false,
+            render: function(data, type, row) {
+                if (row.status === 'Active') {
+                    if (row.user_type == 'man/ceb') {
                         return (
-                            '<button type="button" title="Upload SI" style="margin-left: 5px; margin-right: 5px;" class="btn waves-effect waves-light btn-primary btn-icon" onclick="viewUploadSiModal(\'' +
+                            '<button type="button" title="View" style="margin-left: 5px; margin-right: 5px;" class="btn waves-effect waves-light btn-primary btn-icon" onclick="viewPoLines(\'' +
                             row.hd_id + '\',\'' + row.store + '\',\'' + row.po_date + '\',\'' + row
-                            .document_no + '\')">' +
+                            .document_no + '\',\'' + row.user_type + '\')">' +
+                            '<i class="icofont icofont-eye-alt" style="padding-left: 5px; font-size: 20px;"></i>' +
+                            '</button>' +
+                            '<button type="button" title="Upload SI" style="margin-left: 5px; margin-right: 5px;" class="btn waves-effect waves-light btn-primary btn-icon" onclick="viewUploadModal(\'' +
+                            row.hd_id + '\',\'' + row.store + '\',\'' + row.po_date + '\',\'' + row
+                            .document_no + '\',\'' + row.user_type + '\')">' +
                             '<i class="icofont icofont-upload-alt" style="padding-left: 5px; font-size: 20px;"></i>' +
                             '</button>'
                         );
-                    } else {
-                        return '';
-                    }
-                }
-            }
-        ],
-        paging: true,
-        pagingType: "full_numbers",
-        lengthMenu: [
-            [10, 25, 50, 1000],
-            [10, 25, 50, "Max"]
-        ],
-        pageLength: 10,
-        language: {
-            search: '',
-            searchPlaceholder: ' Search...'
-        }
-    });
-
-
-}
-
-
-function load_cancelled_po_table() {
-
-    if (dataTable_pending) {
-        dataTable_pending.destroy();
-    }
-
-    var dataTable_pending = $('#cancelled_tbl').DataTable({
-        processing: true,
-        serverSide: true,
-        searching: true,
-        lengthChange: false,
-        ordering: false,
-        ajax: {
-            url: "<?php echo base_url(); ?>PoController/get_cancelled_po_list",
-            type: "POST",
-            data: function(d) {
-                d.start = d.start || 0;
-                d.length = d.length || 10;
-            }
-        },
-        columns: [{
-                data: 'store'
-            },
-            {
-                data: 'vendor_code'
-            },
-            {
-                data: 'doc_no'
-            },
-            {
-                data: 'po_date'
-            },
-            {
-                data: 'status',
-                render: function(data, type, row) {
-                    if (row.status === 'Cancelled') {
-                        return '<span class="badge badge-danger">CANCELLED</span>';
-                    }
-                    return row.status;
-                }
-            },
-            {
-                data: null,
-                orderable: false,
-                render: function(data, type, row) {
-                    if (row.status === 'Cancelled') {
+                    } else if (row.user_type == 'buyer') {
                         return (
-                            ''
+                            '<button type="button" title="View" style="margin-left: 5px; margin-right: 5px;" class="btn waves-effect waves-light btn-primary btn-icon" onclick="viewPoLines(\'' +
+                            row.hd_id + '\',\'' + row.store + '\',\'' + row.po_date + '\',\'' + row
+                            .document_no + '\',\'' + row.user_type + '\')">' +
+                            '<i class="icofont icofont-eye-alt" style="padding-left: 5px; font-size: 20px;"></i>' +
+                            '</button>' +
+                            '<button type="button" title="Upload SRR" style="margin-left: 5px; margin-right: 5px;" class="btn waves-effect waves-light btn-primary btn-icon" onclick="viewUploadModal(\'' +
+                            row.hd_id + '\',\'' + row.store + '\',\'' + row.po_date + '\',\'' + row
+                            .document_no + '\',\'' + row.user_type + '\')">' +
+                            '<i class="icofont icofont-upload-alt" style="padding-left: 5px; font-size: 20px;"></i>' +
+                            '</button>'
                         );
-                    } else {
-                        return '';
                     }
+                } else {
+                    return '';
                 }
             }
-        ],
-        paging: true,
-        pagingType: "full_numbers",
-        lengthMenu: [
-            [10, 25, 50, 1000],
-            [10, 25, 50, "Max"]
-        ],
-        pageLength: 10,
-        language: {
-            search: '',
-            searchPlaceholder: ' Search...'
         }
-    });
+    ],
+    paging: true,
+    pagingType: "full_numbers",
+    lengthMenu: [
+        [10, 25, 50, 1000],
+        [10, 25, 50, "Max"]
+    ],
+    pageLength: 10,
+    language: {
+        search: '',
+        searchPlaceholder: ' Search...'
+    }
+});
 
 
-    $('.dataTables_filter input[type="search"]').css({
-        'width': '300px',
-        'margin-bottom': '10px',
-        'padding': '5px',
-        'box-sizing': 'border-box'
-    });
+$('.dataTables_filter input[type="search"]').css({
+    'width': '300px',
+    'margin-bottom': '10px',
+    'padding': '5px',
+    'box-sizing': 'border-box'
+});
 
-}
 
-function viewUploadSiModal(hd_id, store, po_date, document_no) {
+function viewUploadModal(hd_id, store, po_date, document_no, user_type) {
     selected_hd_id = hd_id;
-    console.log(selected_hd_id + store + po_date + document_no);
-    loadImages(document_no);
+    console.log(selected_hd_id + store + po_date + document_no + user_type);
+    if(user_type=="man/ceb"){
+        loadSiImages(document_no);
+    } else {
+        loadSrrImages(document_no);
+    }
     $("#doc_no_val").val(document_no);
     $("#po_doc_no_txt").html("<span>" + "PO Document NO : " + "<h4>" + document_no + "</h4>" + "</span>");
     $("#po_date_txt").html("<span>" + "PO Date : " + "<h4>" + po_date + "</h4>" + "</span>");
-    $("#upload_si_modal").modal('show');
+    $("#upload_modal").modal('show');
+   
+    
+
 }
 
-function loadImages(document_no) {
+function loadSiImages(document_no) {
     $.ajax({
-        url: '<?= base_url('UploadController/view_images/'); ?>' + document_no, 
+        url: '<?= base_url('UploadController/view_si_images/'); ?>' + document_no,
         type: 'GET',
         dataType: 'html',
         success: function(response) {
             $('#gallery-container').html(response);
+            $('#gallery-container2').html(response);
         },
         error: function() {
             alert('Failed to fetch images. Please try again.');
@@ -504,5 +554,94 @@ function loadImages(document_no) {
     });
 }
 
+function loadSrrImages(document_no) {
+    $.ajax({
+        url: '<?= base_url('UploadController/view_srr_images/'); ?>' + document_no,
+        type: 'GET',
+        dataType: 'html',
+        success: function(response) {
+            $('#gallery-container').html(response);
+            $('#gallery-container2').html(response);
+        },
+        error: function() {
+            alert('Failed to fetch images. Please try again.');
+        }
+    });
+}
 
+function viewSiImg(imgElement) {
+    var imgSrc = imgElement.getAttribute('data-img-src');
+    console.log('Image Source:', imgSrc);
+    $('#siImage').attr('src', imgSrc);
+    $('#view_si_img_modal').modal('show');
+}
+function viewSrrImg(imgElement) {
+    var imgSrc = imgElement.getAttribute('data-img-src');
+    console.log('Image Source:', imgSrc);
+    $('#srrImage').attr('src', imgSrc);
+    $('#view_srr_img_modal').modal('show');
+}
+
+function viewPoLines(hd_id, store, po_date, doc_no, user_type) {
+    selected_hd_id = hd_id;
+    console.log(selected_hd_id + store + po_date + user_type);
+    $("#doc_no_val2").val(doc_no);
+    $("#po_doc_no_txt2").html("<span>" + "PO Document NO : " + "<h4>" + doc_no + "</h4>" +
+        "</span>");
+    $("#po_date_txt2").html("<span>" + "PO Date : " + "<h4>" + po_date + "</h4>" + "</span>");
+
+    $("#po_lines_modal").modal('show')
+    if(user_type==  "man/ceb"){
+        loadSiImages(doc_no);
+    } else {
+        loadSrrImages(doc_no);
+    }
+    
+    $.ajax({
+        url: '<?php echo site_url('PoController/listPoLines')?>',
+        type: 'POST',
+        data: {
+            hd_id: hd_id
+        },
+        success: function(response) {
+            var jObj = JSON.parse(response);
+            console.log(jObj);
+            populatePoLinesTable(jObj);
+
+        }
+    });
+
+}
+const poLinesTable = $("#po_lines_table").DataTable({
+    "ordering": false,
+    "lengthChange": false,
+    "language": {
+        search: '',
+        searchPlaceholder: ' Search...'
+    }
+});
+
+$('.dataTables_filter input[type="search"]').css({
+    'width': '300px',
+    'margin-right': '10px',
+    'padding': '5px',
+    'box-sizing': 'border-box'
+});
+
+
+function populatePoLinesTable(list) {
+    poLinesTable.clear().draw();
+
+    for (var c = 0; c < list.length; c++) {
+        var item_code = list[c].item_code;
+        var description = list[c].description;
+        var pending_qty = list[c].pending_qty;
+        var uom = list[c].uom;
+
+        var rowNode = poLinesTable.row.add([item_code, description, uom, pending_qty]).draw().node();
+
+        // $(rowNode).find('td').css({'color': 'black', 'font-family': 'sans-serif','text-align': 'center'});  
+    }
+
+}
 </script>

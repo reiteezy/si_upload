@@ -1,42 +1,58 @@
 <?php
 class Upload_model extends CI_Model {
 
-// public function get_last_sequence_number($doc_no) {
-//     $this->db->select('MAX(CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(img_path, "_si_", -1), ".", 1) AS UNSIGNED)) as last_seq');
-//     $this->db->from('si_uploads');
-//     $this->db->where('document_no', $doc_no);
-//     $query = $this->db->get();
-//     $result = $query->row();
-
-//     return $result->last_seq ? $result->last_seq : 0;
-// }
-
 public function update_last_sequence_number($doc_no, $new_seq_number) {
 }
 
-public function save_upload_details($doc_no, $filename) {
+public function save_upload_details($doc_no, $upload_type, $filename) {
+    
     $data = array(
         'document_no' => $doc_no,
         'img_path' => $filename
     );
-    $this->db->insert('si_uploads', $data);
+    if($upload_type == 'si_upload'){
+        $this->db->insert('si_uploads', $data);
+    } else {
+        $this->db->insert('srr_uploads', $data);
+    }
 }
 
-public function get_images_by_doc_no($doc_no) {
-    $this->db->order_by('si_id', 'DESC');
-    $this->db->select('img_path');
-    $this->db->from('si_uploads');
-    $this->db->where('document_no', $doc_no);
+public function get_si_images_by_doc_no($doc_no) {
+ 
+        $this->db->order_by('si_id', 'DESC');
+        $this->db->select('img_path');
+        $this->db->from('si_uploads');
+        $this->db->where('document_no', $doc_no);
+  
     $query = $this->db->get();
 
     return $query->result_array();
 }
 
-public function check_file_exists($filename) {
-    $this->db->select('si_id'); 
-    $this->db->from('si_uploads');
-    $this->db->where('img_path', $filename);
-    $query = $this->db->get();
+public function get_srr_images_by_doc_no($doc_no) {
+
+    $this->db->order_by('srr_id', 'DESC');
+    $this->db->select('img_path');
+    $this->db->from('srr_uploads');
+    $this->db->where('document_no', $doc_no);
+
+$query = $this->db->get();
+
+return $query->result_array();
+}
+
+public function check_file_exists($filename, $upload_type) {
+    if($upload_type = 'si_upload'){
+        $this->db->select('si_id'); 
+        $this->db->from('si_uploads');
+        $this->db->where('img_path', $filename);
+        $query = $this->db->get();
+    } else {
+        $this->db->select('srr_id'); 
+        $this->db->from('srr_uploads');
+        $this->db->where('img_path', $filename);
+        $query = $this->db->get();
+    }
 
     if ($query->num_rows() > 0) {
         return true;

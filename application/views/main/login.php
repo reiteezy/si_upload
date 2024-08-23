@@ -16,12 +16,13 @@
 
 </head>
 
-<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
+<body class="img js-fullheight" style="background-image: url('<?php echo base_url('assets/assets/images/bg2.png'); ?>'); background-size: cover; background-position: left center;">
     <section class="ftco-section">
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center" style="margin-top: 50px;">
                 <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section"></h2>
+                    <h2 class="heading-section">Merchandise Management System</h2>
+                    <h2 class="heading-section">SI/SRR Uploading</h2>
                 </div>
             </div>
             <div class="row justify-content-center">

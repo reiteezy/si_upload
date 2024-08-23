@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
         <div class="navbar-logo">
             <a href="<?php base_url('')?>" style="padding:5px; margin-left:10px">
-               <h4>MMS - SI UPLOADING</h4>
+                <h4>MMS - SI UPLOADING</h4>
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="feather icon-menu icon-toggle-right"></i>
@@ -18,7 +18,13 @@
                     <div class="dropdown-primary dropdown">
                         <div class="dropdown-toggle" data-bs-toggle="dropdown">
                             <!-- <img src="../files/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
-                            <span><?php echo $this->session->userdata('supplier_name')?></span>
+                            <!-- <?php if ($this->session->userdata('user_type') == 'buyer'): ?>
+                            <span><?php echo $this->session->userdata('supplier_name'); ?></span>
+                            <?php else: ?>
+                            <span><?php echo $this->session->userdata('emp_name'); ?></span>
+                            <?php endif; ?> -->
+                            
+                            <span><?php echo $this->session->userdata('user_type'); ?></span>
                             <i class="feather icon-chevron-down"></i>
                         </div>
                         <ul class="profile-notification dropdown-menu" data-dropdown-in="fadeIn"
