@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
         <div class="navbar-logo">
             <a href="<?php base_url('')?>" style="padding:5px; margin-left:10px">
-                <h4>MMS - SI UPLOADING</h4>
+                <h4>MMS - UPLOADING</h4>
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="feather icon-menu icon-toggle-right"></i>
@@ -17,14 +17,20 @@
                 <li class="user-profile header-notification">
                     <div class="dropdown-primary dropdown">
                         <div class="dropdown-toggle" data-bs-toggle="dropdown">
-                            <!-- <img src="../files/assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image"> -->
-                            <!-- <?php if ($this->session->userdata('user_type') == 'buyer'): ?>
-                            <span><?php echo $this->session->userdata('supplier_name'); ?></span>
-                            <?php else: ?>
-                            <span><?php echo $this->session->userdata('emp_name'); ?></span>
-                            <?php endif; ?> -->
-                            
-                            <span><?php echo $this->session->userdata('user_type'); ?></span>
+
+                            <?php if (($this->session->userdata('user_type') == 'srr-uploader') || ($this->session->userdata('user_type') == 'si-uploader')){ 
+                                 $photo = $this->session->userdata('emp_photo');
+                                 $username = $this->session->userdata('username');
+                                 echo '<span style="margin-right: 10px;">'.$username.'</span>';
+                               $src = str_replace("../", "http://172.16.161.34:8080/hrms/", $photo);
+                            echo '<img src="'.$src.'" class="img-radius" alt="User-Profile-Image">';
+                           
+                        }else {
+                            $photo = base_url('assets/assets/images/profile.png');
+                            $username = $this->session->userdata('username');
+                            echo '<span style="margin-right: 10px;">'.$username.'</span>';
+                            echo '<img src="'.$photo.'" class="img-radius" alt="User-Profile-Image">';
+                        }?>
                             <i class="feather icon-chevron-down"></i>
                         </div>
                         <ul class="profile-notification dropdown-menu" data-dropdown-in="fadeIn"

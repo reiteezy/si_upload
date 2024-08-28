@@ -38,9 +38,13 @@ class Po_model extends CI_Model{
           SELECT a.hd_id, a.document_no, a.date_ AS po_date, a.vendor AS vendor_code,
                  a.db_id, a.textfile_name AS doc_no, a.status, a.status_b, 
                  b.value_ AS store
+                 #, MAX(e.document_no) AS si_doc_no, MAX(f.document_no) AS srr_doc_no 
           FROM pending_po_header a
           INNER JOIN reorder_store b ON a.db_id = b.databse_id
+          #LEFT JOIN si_uploads e ON a.document_no = e.document_no
+          #LEFT JOIN srr_uploads f ON a.document_no = f.document_no
           WHERE a.document_no NOT LIKE '{$cas_name}%'
+          #GROUP BY a.textfile_name
           ";
         
         $query = $this->db->query($table_query);
@@ -54,9 +58,13 @@ class Po_model extends CI_Model{
           SELECT a.hd_id, a.document_no, a.date_ AS po_date, a.vendor AS vendor_code,
                  a.db_id, a.textfile_name AS doc_no, a.status, a.status_b,
                  b.value_ AS store
+                 #, MAX(e.document_no) AS si_doc_no, MAX(f.document_no) AS srr_doc_no 
           FROM pending_po_header a
           INNER JOIN reorder_store b ON a.db_id = b.databse_id
+          #LEFT JOIN si_uploads e ON a.document_no = e.document_no
+          #LEFT JOIN srr_uploads f ON a.document_no = f.document_no
           WHERE a.document_no LIKE '{$cas_name}%'
+          #GROUP BY a.textfile_name
           ";
         
         $query = $this->db->query($table_query);
@@ -78,11 +86,12 @@ class Po_model extends CI_Model{
           $table_query = "
             SELECT a.hd_id, a.document_no, a.date_ AS po_date, a.vendor AS vendor_code,
                    a.db_id, a.textfile_name AS doc_no, a.status, 
-                   b.value_ AS store, MAX(d.document_no) AS si_doc_no 
+                   b.value_ AS store, MAX(d.document_no) AS si_doc_no, MAX(f.document_no) AS srr_doc_no
             FROM pending_po_header a
             INNER JOIN reorder_store b ON a.db_id = b.databse_id
             LEFT JOIN reorder_po_log c ON a.hd_id = c.hd_id
             LEFT JOIN si_uploads d ON a.document_no = d.document_no
+            LEFT JOIN srr_uploads f ON a.document_no = f.document_no
             WHERE a.status_b = 'Pending'
             AND a.status = 'Active'
             AND a.vendor = ?
@@ -108,11 +117,12 @@ class Po_model extends CI_Model{
         $table_query = "
             SELECT a.hd_id, a.document_no, a.date_ AS po_date, a.vendor AS vendor_code,
                    a.db_id, a.textfile_name AS doc_no, a.status,
-                   b.value_ AS store, MAX(d.document_no) AS si_doc_no 
+                   b.value_ AS store, MAX(d.document_no) AS si_doc_no, MAX(f.document_no) AS srr_doc_no 
             FROM pending_po_header a
             INNER JOIN reorder_store b ON a.db_id = b.databse_id
             LEFT JOIN reorder_po_log c ON a.hd_id = c.hd_id
             LEFT JOIN si_uploads d ON a.document_no = d.document_no
+            LEFT JOIN srr_uploads f ON a.document_no = f.document_no
             WHERE (a.status = 'Cancelled')
             AND a.vendor = ?
             GROUP BY a.hd_id, a.document_no,  a.date_, a.vendor, a.db_id, 
@@ -136,11 +146,12 @@ class Po_model extends CI_Model{
         $table_query = "
             SELECT a.hd_id, a.document_no, a.date_ AS po_date, a.vendor AS vendor_code,
                    a.db_id, a.textfile_name AS doc_no, a.status,
-                   b.value_ AS store, MAX(d.document_no) AS si_doc_no 
+                   b.value_ AS store, MAX(d.document_no) AS si_doc_no, MAX(f.document_no) AS srr_doc_no 
             FROM pending_po_header a
             INNER JOIN reorder_store b ON a.db_id = b.databse_id
             LEFT JOIN reorder_po_log c ON a.hd_id = c.hd_id
             LEFT JOIN si_uploads d ON a.document_no = d.document_no
+            LEFT JOIN srr_uploads f ON a.document_no = f.document_no
             WHERE (a.status_b = 'Partially Delivered')
             AND (a.status = 'Active')
             AND a.vendor = ?
@@ -166,11 +177,12 @@ class Po_model extends CI_Model{
         $table_query = "
             SELECT a.hd_id, a.document_no, a.date_ AS po_date, a.vendor AS vendor_code,
                    a.db_id, a.textfile_name AS doc_no, a.status,
-                   b.value_ AS store, MAX(d.document_no) AS si_doc_no 
+                   b.value_ AS store, MAX(d.document_no) AS si_doc_no, MAX(f.document_no) AS srr_doc_no 
             FROM pending_po_header a
             INNER JOIN reorder_store b ON a.db_id = b.databse_id
             LEFT JOIN reorder_po_log c ON a.hd_id = c.hd_id
             LEFT JOIN si_uploads d ON a.document_no = d.document_no
+            LEFT JOIN srr_uploads f ON a.document_no = f.document_no
             WHERE (a.status_b = 'Fully Delivered')
             AND (a.status = 'Active')
             AND a.vendor = ?

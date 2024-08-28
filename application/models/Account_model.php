@@ -31,7 +31,7 @@ class Account_model extends CI_Model{
                 $vendor_code = $row->vendor_no;
             
                 $supplierDetails = $this->retrieveSupplierDetails($vendor_code);
-
+            
                 if (password_verify($pass, $row->password)) {
                     $session_data = array(
                         'user_id' => $row->user_id,
@@ -56,18 +56,23 @@ class Account_model extends CI_Model{
         function retrieveAccountID($user, $pass) 
         {
             $this->db->where('username', $user);
-            $this->db->where('user_type', 'buyer');
-            $this->db->or_where('user_type', 'man/ceb');
+            $this->db->group_start(); // Start grouping
+            $this->db->where('user_type', 'si-uploader');
+            $this->db->or_where('user_type', 'srr-uploader');
+            $this->db->group_end(); // End grouping
             $this->db->select('reorder_users.*');
             $this->db->from('reorder_users');
             $query = $this->db->get();
+            
 
             if ($query->num_rows() > 0) {
                 $row = $query->row(); 
                 $emp_id = $row->emp_id;
-            
-                // $empDetails = $this->retrieveEmployeeDetails($emp_id);
-
+                $empDetails = $this->retrieveEmployeeDetails($emp_id);
+                $empPhoto =  $this->getPhoto($emp_id);
+                // var_dump($empDetails);
+                // var_dump($empPhoto);
+                // exit;
                 if (password_verify($pass, $row->password)) {
                     $session_data = array(
                         'user_id' => $row->user_id,
@@ -75,6 +80,7 @@ class Account_model extends CI_Model{
                         'emp_id' => $row->emp_id,
                         'user_type' => $row->user_type,
                         'emp_name' => isset($empDetails->name) ? $empDetails->name : 'Unknown',
+                        'emp_photo' => isset($empPhoto) ? $empPhoto : 'Unknown',
                         'logged_in' => true
                     );
                     $this->session->set_userdata($session_data);

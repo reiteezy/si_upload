@@ -219,12 +219,12 @@
                         <div class="col-md-6 col-xs-12">
                             <div id="po_date_txt"></div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="height: 500px; overflow-y: auto;">
+            <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
                 <div class="card-block">
                     <div style="margin-left: 120px;">
                         <span style="font-size: 10px; color: red;">Max size: 2MB</span>
@@ -240,7 +240,7 @@
                         </form>
 
                     </div>
-                    <div class="card-block" style="margin-top: 30px;">
+                    <div class="card-block" style="margin: 30px; padding: 10px;">
                         <div class="container" style="max-height: 600px;">
                             <div class="row" id="gallery-container">
                             </div>
@@ -258,20 +258,6 @@
 </div>
 
 <!--------------- END OF UPLOAD SI MODAL---------------->
-
-<!-- Modal -->
-<div class="modal fade" id="view_si_modal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
-    aria-hidden="true" style="z-index: 1080;">
-    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 40%">
-        <div class="modal-content">
-            <div class="modal-body">
-                <img id="siImage" src="" alt="SI Image">
-            </div>
-        </div>
-    </div>
-</div>
-
-<!---- end of view uploaded si modal--->
 
 <!--- view po modal -->
 
@@ -292,7 +278,7 @@
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="height: 500px; overflow-y: auto;">
+            <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
                 <div class="card-block">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -338,7 +324,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="si_uploaded" role="tabpanel" aria-labelledby="pills-profile-tab">
-                            <div class="card-block" style="padding-top: 30px">
+                            <div class="card-block" style="padding: 10px; margin-top:30px;">
                                 <div class="container" style="max-height: 600px;">
                                     <div class="row" id="gallery-container2">
 
@@ -361,37 +347,70 @@
 
 <!--- end of view po modal -->
 
+<!---- view uploaded si img modal-->
+<div class="modal fade" id="view_si_img_modal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+    aria-hidden="true" style="z-index: 1080;">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 40%">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img id="siImage" src="" alt="SI Image">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---- end of view uploaded si img modal--->
 
 <!-- loader modal ---->
 <div id="loaderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loaderModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 100px; max-height: 200px;">
         <div class="modal-content">
-            <div class="modal-body text-center">
-                <!-- <div class="loader"></div> -->
-                <!-- <img src="<?= base_url('assets/assets/loader.gif')?>" alt="Loading..." width="20" /> -->
-                <p>Uploading...</p>
+            <div class="modal-body" style="display: flex; align-items: center;justify-content: center;">
+                <div class="upload-loader"></div>
+                <!-- <p>Uploading...</p> -->
             </div>
         </div>
     </div>
 </div>
 <!-- end of loader modal -->
 
+<!-------------------session modal -------------->
+<div class="modal fade" id="sessionExpiredModal" tabindex="-1" role="dialog" aria-labelledby="sessionExpiredModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="sessionExpiredModalLabel">Session Expired</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Your session has expired. Please log in again to continue.
+            </div>
+            <div class="modal-footer">
+                <a href="<?php echo site_url('login'); ?>" class="btn btn-primary">Log In</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--------------------- end session modal------------------------->
 
 <script type="text/javascript" src="<?= base_url('assets/assets/js/jquery-3.7.0.js'); ?>"></script>
 <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script> -->
 <script src="<?php echo base_url(); ?>assets/assets/js/jquery.dataTables.min.js"></script>
 <script>
+
 $(document).ready(function(e) {
     $("#uploadForm").on('submit', function(e) {
         e.preventDefault();
-       var uploadType = "si_upload";
+        var uploadType = "si_upload";
         $("#loaderModal").modal('show');
 
         var docNum = $('#doc_no_val').val();
         var formData = new FormData(this);
         console.log(docNum);
-        var minLoadTime = 3000;
+        var minLoadTime = 1000;
         var startTime = Date.now();
         formData.append('uploadType', uploadType);
 
@@ -440,12 +459,6 @@ $(document).ready(function(e) {
 });
 
 
-function viewSiModal(imgElement) {
-    var imgSrc = imgElement.getAttribute('data-img-src');
-    console.log('Image Source:', imgSrc);
-    $('#siImage').attr('src', imgSrc);
-    $('#view_si_modal').modal('show');
-}
 // const uploadTable = $("#upload_si_modal").DataTable({ "ordering": false});
 
 load_pending_po_table();
@@ -676,10 +689,21 @@ function load_partial_delivered_table() {
                 data: 'status',
                 render: function(data, type, row) {
                     if (row.status === 'Active') {
-                        return '<span class="badge badge-success">' + row.status + '</span>';
-                    } else {
-                        return '<span class="badge badge-danger">' + row.status + '</span>';
+                    let badges = '<span class="badge badge-success">' + row.status + '</span>';
+
+                    if (row.si_doc_no) {
+                        badges += '<span class="badge badge-info">si</span>';
                     }
+
+                    if (row.srr_doc_no) {
+                        badges += '<span class="badge badge-info">srr</span>';
+                    }
+
+                    return badges;
+                } else if (row.status === 'Cancelled') {
+                    return '<span class="badge badge-danger">' + row.status + '</span>';
+                }
+                return row.status;
                 }
             },
             {
@@ -830,12 +854,14 @@ const poLinesTable = $("#po_lines_table").DataTable({
         searchPlaceholder: ' Search...'
     }
 });
+
 $('.dataTables_filter input[type="search"]').css({
     'width': '300px',
     'margin-right': '10px',
     'padding': '5px',
     'box-sizing': 'border-box'
 });
+
 
 function viewPoLines(hd_id, store, po_date, doc_no) {
     selected_hd_id = hd_id;
@@ -902,8 +928,82 @@ function loadImages(document_no) {
             $('#gallery-container2').html(response);
         },
         error: function() {
-            alert('Failed to fetch images. Please try again.');
+            Swal.fire(
+                'Error!',
+                'Failed to fetch images. Please try again.',
+                'error'
+            );
         }
     });
 }
+
+
+function viewSiImg(imgElement) {
+    var imgSrc = imgElement.getAttribute('data-img-src');
+    console.log('Image Source:', imgSrc);
+    $('#siImage').attr('src', imgSrc);
+    $('#view_si_img_modal').modal('show');
+}
+
+
+function deleteImage(url, doc_no) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(url, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Swal.fire(
+                        'Deleted!',
+                        data.message,
+                        'success'
+                    );
+                    loadImages(doc_no);
+                } else {
+                    Swal.fire(
+                        'Error!',
+                        data.message,
+                        'error'
+                    );
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire(
+                    'Error!',
+                    'An error occurred while trying to delete the image.',
+                    'error'
+                );
+            });
+        }
+    });
+}
+
+
+$(document).ready(function() {
+    function checkSession() {
+        $.ajax({
+            url: '<?php echo base_url('LoginController/checkSession'); ?>',
+            type: 'GET',
+            success: function(data) {
+                if (data.sessionExpired) {
+                    $('#sessionExpiredModal').modal('show');
+                }
+            }
+        });
+    }
+
+    setInterval(checkSession, 600000); 
+});
 </script>

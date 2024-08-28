@@ -35,4 +35,11 @@ class LoginController extends CI_Controller {
         $this->session->set_flashdata('logout_notification', 'Logged Out Of The System');
         redirect(base_url(), 'refresh');
         }
+
+
+    public function checkSession() {
+        
+        $response = array('sessionExpired' => !$this->session->has_userdata('user_id'));
+        echo json_encode($response);
+        }
 }

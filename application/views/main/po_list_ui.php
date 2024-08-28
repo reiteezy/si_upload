@@ -54,7 +54,7 @@
                                 <div class="card-header">
                                 </div>
                                 <div class="table-responsive">
-                                    <table id="po_tbl" class="table table-striped table-bordered ">
+                                    <table id="po_tbl" class="table table-striped table-bordered" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>Store</th>
@@ -115,16 +115,14 @@
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-
-
+            <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
                 <div class="card-block">
                     <div class="upload-container">
                         <form id="uploadForm" enctype="multipart/form-data">
                             <input type="file" name="images[]" multiple>
                             <div class="text-center">
                                 <?php
-                                    $buttonText = ($_SESSION['user_type'] === 'buyer') ? 'UPLOAD SRR' : 'UPLOAD SI';
+                                    $buttonText = ($_SESSION['user_type'] === 'srr-uploader') ? 'UPLOAD SRR' : 'UPLOAD SI';
                                     ?>
                                 <input type="submit" name="upload"
                                     value="<?php echo htmlspecialchars($buttonText, ENT_QUOTES, 'UTF-8'); ?>">
@@ -196,7 +194,7 @@
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="height: 500px; overflow-y: auto;">
+            <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
                 <div class="card-block">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -211,7 +209,7 @@
                                 id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#si_uploaded" type="button"
                                 role="tab" aria-controls="pills-profile" aria-selected="false"
                                 style="border: 1px solid #4099ff"> <?php
-                                    $buttonText = ($_SESSION['user_type'] === 'man/ceb') ? 'UPLOADED SI' : 'UPLOADED SRR';
+                                    $buttonText = ($_SESSION['user_type'] === 'si-uploader') ? 'UPLOADED SI' : 'UPLOADED SRR';
                                     ?><?php echo htmlspecialchars($buttonText, ENT_QUOTES, 'UTF-8'); ?></button>
                         </li>
                     </ul>
@@ -269,33 +267,54 @@
 
 <!-- loader modal ---->
 <div id="loaderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loaderModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    aria-hidden="false" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 100px; max-height: 200px;">
         <div class="modal-content">
-            <div class="modal-body text-center">
-                <!-- <div class="loader"></div> -->
-                <!-- <img src="<?= base_url('assets/assets/loader.gif')?>" alt="Loading..." width="20" /> -->
-                <p>Uploading...</p>
+            <div class="modal-body" style="display: flex; align-items: center;justify-content: center;">
+                <div class="upload-loader"></div>
+                <!-- <p>Uploading...</p> -->
             </div>
         </div>
     </div>
 </div>
 <!-- end of loader modal -->
 
-
+<!-------------------session modal -------------->
+<div class="modal fade" id="sessionExpiredModal" tabindex="-1" role="dialog" aria-labelledby="sessionExpiredModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="sessionExpiredModalLabel">Session Expired</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Your session has expired. Please log in again to continue.
+            </div>
+            <div class="modal-footer">
+                <a href="<?php echo site_url('login'); ?>" class="btn btn-primary">Log In</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--------------------- end session modal------------------------->
 
 <script type="text/javascript" src="<?= base_url('assets/assets/js/jquery-3.7.0.js'); ?>"></script>
 <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script> -->
 <script src="<?php echo base_url(); ?>assets/assets/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.js"></script>
 <script>
+
 $(document).ready(function(e) {
     $("#uploadForm").on('submit', function(e) {
         e.preventDefault();
         var userType = $('#session-data').data('user-type');
         // Show the loader
-        
-        if(userType == 'man/ceb'){
+
+        if (userType == 'si-uploader') {
             var uploadType = 'si_upload';
         } else {
             var uploadType = 'srr_upload';
@@ -305,7 +324,7 @@ $(document).ready(function(e) {
         var docNum = $('#doc_no_val').val();
         var formData = new FormData(this);
         console.log(docNum);
-        var minLoadTime = 3000;
+        var minLoadTime = 1000;
         var startTime = Date.now();
         formData.append('uploadType', uploadType);
 
@@ -321,13 +340,13 @@ $(document).ready(function(e) {
                 var remainingTime = Math.max(0, minLoadTime - elapsedTime);
 
                 setTimeout(function() {
-                    if(uploadType == 'si_upload'){
+                    if (uploadType == 'si_upload') {
                         loadSiImages(docNum);
                     } else {
                         loadSrrImages(docNum);
                     }
-                    
-                    
+
+
                     $("#loaderModal").modal('hide');
 
                     Swal.fire({
@@ -345,6 +364,7 @@ $(document).ready(function(e) {
                         }
                     });
                 }, remainingTime);
+                reload_table();
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 $("#loaderModal").modal('hide');
@@ -431,9 +451,19 @@ var dataTable_po = $('#po_tbl').DataTable({
             data: 'status',
             render: function(data, type, row) {
                 if (row.status === 'Active') {
-                    return '<span class="badge badge-success">' + row.status + '</span>';
+                    let badges = '<span class="badge badge-success">' + row.status + '</span>';
+
+                    if (row.si_doc_no) {
+                        badges += '<span class="badge badge-info">si</span>';
+                    }
+
+                    if (row.srr_doc_no) {
+                        badges += '<span class="badge badge-info">srr</span>';
+                    }
+
+                    return badges;
                 } else if (row.status === 'Cancelled') {
-                    return '<span class="badge badge-danger">CANCELLED</span>';
+                    return '<span class="badge badge-danger">' + row.status + '</span>';
                 }
                 return row.status;
             }
@@ -441,7 +471,6 @@ var dataTable_po = $('#po_tbl').DataTable({
         {
 
             render: function(data, type, row) {
-                // Conditionally assign a CSS class based on the 'status' value
                 if (row.status_b === 'Pending') {
 
                     return '<span class="badge badge-warning">' + row.status_b + '</span>'
@@ -458,7 +487,7 @@ var dataTable_po = $('#po_tbl').DataTable({
                     return ' '
                 }
 
-                return row.status; // If none of the conditions match, return the original data
+                return row.status;
             }
         },
 
@@ -467,7 +496,7 @@ var dataTable_po = $('#po_tbl').DataTable({
             orderable: false,
             render: function(data, type, row) {
                 if (row.status === 'Active') {
-                    if (row.user_type == 'man/ceb') {
+                    if (row.user_type == 'si-uploader') {
                         return (
                             '<button type="button" title="View" style="margin-left: 5px; margin-right: 5px;" class="btn waves-effect waves-light btn-primary btn-icon" onclick="viewPoLines(\'' +
                             row.hd_id + '\',\'' + row.store + '\',\'' + row.po_date + '\',\'' + row
@@ -480,7 +509,7 @@ var dataTable_po = $('#po_tbl').DataTable({
                             '<i class="icofont icofont-upload-alt" style="padding-left: 5px; font-size: 20px;"></i>' +
                             '</button>'
                         );
-                    } else if (row.user_type == 'buyer') {
+                    } else if (row.user_type == 'srr-uploader') {
                         return (
                             '<button type="button" title="View" style="margin-left: 5px; margin-right: 5px;" class="btn waves-effect waves-light btn-primary btn-icon" onclick="viewPoLines(\'' +
                             row.hd_id + '\',\'' + row.store + '\',\'' + row.po_date + '\',\'' + row
@@ -525,7 +554,7 @@ $('.dataTables_filter input[type="search"]').css({
 function viewUploadModal(hd_id, store, po_date, document_no, user_type) {
     selected_hd_id = hd_id;
     console.log(selected_hd_id + store + po_date + document_no + user_type);
-    if(user_type=="man/ceb"){
+    if (user_type == "si-uploader") {
         loadSiImages(document_no);
     } else {
         loadSrrImages(document_no);
@@ -534,8 +563,8 @@ function viewUploadModal(hd_id, store, po_date, document_no, user_type) {
     $("#po_doc_no_txt").html("<span>" + "PO Document NO : " + "<h4>" + document_no + "</h4>" + "</span>");
     $("#po_date_txt").html("<span>" + "PO Date : " + "<h4>" + po_date + "</h4>" + "</span>");
     $("#upload_modal").modal('show');
-   
-    
+
+
 
 }
 
@@ -575,6 +604,7 @@ function viewSiImg(imgElement) {
     $('#siImage').attr('src', imgSrc);
     $('#view_si_img_modal').modal('show');
 }
+
 function viewSrrImg(imgElement) {
     var imgSrc = imgElement.getAttribute('data-img-src');
     console.log('Image Source:', imgSrc);
@@ -591,12 +621,12 @@ function viewPoLines(hd_id, store, po_date, doc_no, user_type) {
     $("#po_date_txt2").html("<span>" + "PO Date : " + "<h4>" + po_date + "</h4>" + "</span>");
 
     $("#po_lines_modal").modal('show')
-    if(user_type==  "man/ceb"){
+    if (user_type == "si-uploader") {
         loadSiImages(doc_no);
     } else {
         loadSrrImages(doc_no);
     }
-    
+
     $.ajax({
         url: '<?php echo site_url('PoController/listPoLines')?>',
         type: 'POST',
@@ -631,7 +661,6 @@ $('.dataTables_filter input[type="search"]').css({
 
 function populatePoLinesTable(list) {
     poLinesTable.clear().draw();
-
     for (var c = 0; c < list.length; c++) {
         var item_code = list[c].item_code;
         var description = list[c].description;
@@ -642,6 +671,72 @@ function populatePoLinesTable(list) {
 
         // $(rowNode).find('td').css({'color': 'black', 'font-family': 'sans-serif','text-align': 'center'});  
     }
-
 }
+
+
+function deleteImage(url, doc_no, imgType) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(url, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Swal.fire(
+                        'Deleted!',
+                        data.message,
+                        'success'
+                    );
+                    if(imgType == 'si'){
+                    loadSiImages(doc_no);
+                    } else {
+                    loadSrrImages(doc_no);
+                    }
+                } else {
+                    Swal.fire(
+                        'Error!',
+                        data.message,
+                        'error'
+                    );
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire(
+                    'Error!',
+                    'An error occurred while trying to delete the image.',
+                    'error'
+                );
+            });
+        }
+    });
+}
+
+
+$(document).ready(function() {
+    function checkSession() {
+        $.ajax({
+            url: '<?php echo base_url('LoginController/checkSession'); ?>',
+            type: 'GET',
+            success: function(data) {
+                if (data.sessionExpired) {
+                    $('#sessionExpiredModal').modal('show');
+                }
+            }
+        });
+    }
+
+    // Check session every minute
+    setInterval(checkSession, 600000);
+});
 </script>

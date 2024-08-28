@@ -18,7 +18,7 @@
                         </a>
                     </li>
                     <?php endif ?>
-                    <?php if (($this->session->userdata('user_type') == 'buyer') || ($this->session->userdata('user_type') == 'man/ceb')): ?>
+                    <?php if (($this->session->userdata('user_type') == 'srr-uploader') || ($this->session->userdata('user_type') == 'si-uploader')): ?>
                     <li class="<?php echo ($menu=='po_list') ? 'active' : ''; ?>">
                         <a href="<?= base_url('maincontroller/po_list') ?>" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="feather icon-list"></i></span>

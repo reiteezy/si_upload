@@ -60,4 +60,14 @@ public function check_file_exists($filename, $upload_type) {
         return false;
     }
 }
+
+public function delete_si_image_by_path($img_path) {
+    $this->db->where('img_path', $img_path);
+    $this->db->delete('si_uploads'); 
+}
+
+public function delete_srr_image_by_path($img_path) {
+    $this->db->where('img_path', $img_path);
+    $this->db->delete('srr_uploads'); 
+}
 }
