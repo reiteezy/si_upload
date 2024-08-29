@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
         <div class="navbar-logo">
             <a href="<?php base_url('')?>" style="padding:5px; margin-left:10px">
-                <h4>MMS - UPLOADING</h4>
+                <h4>MMS - UPLOADINGdsadsadsd</h4>
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="#!">
                 <i class="feather icon-menu icon-toggle-right"></i>
